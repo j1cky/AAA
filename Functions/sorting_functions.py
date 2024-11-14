@@ -28,10 +28,9 @@ options.add_argument('--disable-dev-shm-usage')
 # options.add_argument("--profile-directory=Default") 
 
 
-def offer_applier(test_url):
+def offer_applier(test_url,usr, password,cv_path,message):
 
     driver = check_easy_apply(test_url)
-
 
     if driver:
         formulaire = promotion_or_formulaire(driver)
@@ -41,7 +40,7 @@ def offer_applier(test_url):
                 postuler(driver)
                 fill_and_submit(driver, cv_path, message)
             else :
-                print('Lien du formulaire')
+                # print('Lien du formulaire')
                 connexion = apec_connect(driver,usr, password)
                 if connexion :
                     print('Connected')
@@ -51,8 +50,10 @@ def offer_applier(test_url):
             fill_and_submit(driver, cv_path, message)
 
 
+        driver.quit()
+        print("Submitted, everything fine")
+        return None
 
-    driver.quit()
 
 
 def select_importer_cv(driver):
@@ -89,7 +90,7 @@ def fill_and_submit(driver, cv_path, message):
         if message :
             pass
 
-        print('Selecting importer cv :')
+        # print('Selecting importer cv :')
         select_importer_cv(driver)
 
         # Upload CV file
@@ -110,9 +111,10 @@ def fill_and_submit(driver, cv_path, message):
             if is_checked:
                 # Décochez la case si elle est cochée
                 save_cv_checkbox.click()
-                print("Checkbox 'Enregistrer le CV' était cochée, elle a été décochée.")
-            else:
-                print("Checkbox 'Enregistrer le CV' n'est pas cochée.")    
+                # print("Checkbox 'Enregistrer le CV' était cochée, elle a été décochée.")
+            # else:
+                # print("Checkbox 'Enregistrer le CV' n'est pas cochée.")    
+
         except Exception as e:
             print(f"Erreur lors de la vérification de la case 'Enregistrer le CV': {e}")
 
@@ -130,7 +132,7 @@ def fill_and_submit(driver, cv_path, message):
 
             # Clic sur le bouton de soumission
             submit_button.click()
-            print("Application submitted successfully!")
+            # print("Application submitted successfully!")
             return True
 
         except Exception as e:
@@ -198,10 +200,10 @@ def connected(driver):
         # Determine if the user is logged in or not
         if "logged" in logged_in_element.get_attribute("class"):
             username = logged_in_element.find_element(By.TAG_NAME, "span").text
-            print(f"User is connected: {username}")
+            # print(f"User is connected: {username}")
             return True
         else:
-            print("User is NOT connected (Mon espace).")
+            # print("User is NOT connected (Mon espace).")
             return False
 
     except Exception as e:
@@ -231,7 +233,7 @@ def apec_connect(driver, usr, password):
         )
         email_input.clear()
         email_input.send_keys(usr)
-        print("Email filled")
+        # print("Email filled")
 
         # Wait and fill password
         password_input = wait.until(
@@ -239,14 +241,14 @@ def apec_connect(driver, usr, password):
         )
         password_input.clear()
         password_input.send_keys(password)
-        print("Password filled.")
+        # print("Password filled.")
 
         # Click on the "Se connecter" button
         connect_button = wait.until(
             EC.element_to_be_clickable((By.XPATH, "(//button[@type='submit' and contains(@class, 'popin-btn')])[2]"))
         )
         connect_button.click()
-        print("Clicked the connect button.")
+        # print("Clicked the connect button.")
 
         # time.sleep(2) 
         return driver
@@ -274,10 +276,10 @@ def check_easy_apply(url):
                 EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler"))
             )
             close_banner.click()
-            print("Closed cookie consent banner.")
+            # print("Closed cookie consent banner.")
         except TimeoutException:
-            print("No cookie consent banner found, continuing immediately.")
-
+            # print("No cookie consent banner found, continuing immediately.")
+            pass
         # Locate the "Postuler" button
         try:            
             apply_button = wait.until(
@@ -287,25 +289,25 @@ def check_easy_apply(url):
             )
             button_text = apply_button.text.strip()
 
-            # Easy Apply
+            # Easy Apply number 0 
             if button_text == "Postuler":
-                print("Easy Apply button found.")
+                # print("Easy Apply button found.")
                 apply_button.click()                
                 time.sleep(2)  
-                return driver 
-            
+                return driver        
 
-            # Website
+            # Website 
             elif "Postuler sur le site" in button_text:
                 print("Complicated Apply button found (redirects to external site).")
-                return False  
-            
-            # No longer Available
-            else:
-                print("Unknown apply button text.")
                 return False
-        except TimeoutException:
-            print("No apply button found.")
+            
+            # No longer Available number 2 
+            else:
+                print("Unknown or no longer available")
+                return False
+            
+        except (TimeoutException, Exception) :
+            # print("No apply button found.")
             driver.quit()
             return False   
     except Exception as e:
