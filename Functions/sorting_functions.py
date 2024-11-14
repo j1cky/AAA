@@ -54,6 +54,7 @@ def offer_applier(test_url):
 
     driver.quit()
 
+
 def select_importer_cv(driver):
     try:
         wait = WebDriverWait(driver, 10)
