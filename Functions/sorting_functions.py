@@ -18,7 +18,7 @@ import os
 
 
 options = Options()
-# options.add_argument('--headless')
+options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
@@ -132,7 +132,7 @@ def already_applied(driver):
         
         # If the element is found, the user has already applied
         if already_applied_message:
-            print("Great !! I already applied to this job.")
+            # print("Great !! I already applied to this job.")
             return True
         
         return False
@@ -196,9 +196,25 @@ def check_easy_apply(url):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)        
         driver.get(url)
         cookie_handling(driver)   
-        driver = locate_and_click_postuler_button(driver) # availability is true (= driver) when postuler button exists, i give it 6 seconds
+        (driver,sign)= locate_and_click_postuler_button(driver) # availability is true (= driver) when postuler button exists, i give it 6 seconds
         
-        return driver
+
+        match sign:
+            case 1:
+                # print('Yes !! Easy apply found')
+                return driver, 1
+            case 2:
+                # print('Unfortunately, External website link:(')
+                return driver, 2
+            case 3:
+                # print('No, Probabely no longer available')
+                return driver, 3
+            case _:
+                print('Unknown option')
+                return driver, 20
+
+
+        
         
     except Exception as e:
         print(f"Error during checking apply possibility: {e}")
@@ -231,21 +247,17 @@ def locate_and_click_postuler_button(driver):
             # print("Easy Apply button found.")
             apply_button.click()                
             time.sleep(2)  
-            return driver        
+            return driver,1        
 
         # Website button available
         elif "Postuler sur le site" in button_text:
-            print("Complicated Apply button found (redirects to external site).")
-            return False
+            # print("Complicated Apply button found (redirects to external site).")
+            return driver,2
         
-        # Already applied 
-        else:
-            print("Unknown or no longer available")
-            return False
         
     except (TimeoutException, Exception) :
         print("No apply button found.")
-        return False  
+        return driver,3
 
 # ----------------------------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------------------------- #
