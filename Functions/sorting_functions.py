@@ -15,7 +15,7 @@ import time
 from pathlib import Path
 
 import os
-
+import json
 
 options = Options()
 options.add_argument('--headless')
@@ -262,12 +262,15 @@ def locate_and_click_postuler_button(driver):
 # ----------------------------------------------------------------------------------------------- #
 # ----------------------------------------------------------------------------------------------- #
 
-
 def get_job_links(url):
 
     try:
         # Open the job application link
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        options2 = Options()
+        options2.add_argument('--headless')
+        options2.add_argument('--no-sandbox')
+        options2.add_argument('--disable-dev-shm-usage')
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options2)
         driver.get(url)
 
         # Wait for the page to load completely
@@ -318,7 +321,6 @@ def read_login_credentials(filepath):
         print("Error: File format is incorrect. String! First line email, second line password.")
         return None, None
     
-
 
 # ----------------------------------------------------------------------------------------------- #
 # ---------------------------------        Trash        ----------------------------------------- #
@@ -377,3 +379,25 @@ def connected(driver):
     except Exception as e:
         print(f"Error checking connection status: {e}")
         return False
+
+
+# raw_url, cv_path, page_max
+def read_read_link_cv(filepath):
+    filepath = os.path.expanduser(filepath)
+
+    try:
+        with open(filepath, 'r') as file:
+            data = json.load(file)
+
+            raw_url = data['raw_url']
+            cv_path = data['cv_path']
+            page_max = data['page_max']
+            return raw_url, cv_path, page_max
+    except FileNotFoundError:
+        print("Error: File not found.")
+        return None, None,None
+    
+    except IndexError:
+        print("Error: File format is incorrect. String! First line raw_url, second line cv_path, third line page_max")
+        return None, None,None
+    
