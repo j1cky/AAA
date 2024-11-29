@@ -27,8 +27,23 @@ options.add_argument('--disable-dev-shm-usage')
 # options.add_argument(f"--user-data-dir={str(default_user_data_dir)}")
 # options.add_argument("--profile-directory=Default") 
 
+from dotenv import load_dotenv
+import math
+import  csv
 
-
+def formatting_url(url):
+    # If the URL ends with "page=", return it unchanged
+    if url.endswith("page="):
+        return url
+    # If the URL already has a "page=" followed by a number, remove the number
+    elif "page=" in url:
+        return url.split("page=")[0] + "page="
+    # If the URL ends with an '&', append "page="
+    elif url.endswith("&"):
+        return url + "page="
+    # If none of the above, add "&page=" to the URL
+    else:
+        return url + "&page="
 
 def fill_and_submit(driver, cv_path, message):
     try:
@@ -294,7 +309,6 @@ def get_job_links(url):
     except Exception as e:
         print(f"Error during filtering links: {e}")
         return None
-
 
 def read_login_credentials(filepath):
     """

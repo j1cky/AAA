@@ -11,18 +11,6 @@
         {
             "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=computer%20vision&typesConvention=143684&typesConvention=143685&typesConvention=1436&page=",
             "number_of_offers": 15
-        },
-        {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=automaticien&typesConvention=143684&typesConvention=143685&typesConvention=143686&ty=&salaireMinimum=20&salaireMaximum=45&page=",
-            "number_of_offers": 514
-        },
-        {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=ing%C3%A9nieur%20commande&typesConvention=143684&typesConvention=143685&typesConvent=&salaireMinimum=20&salaireMaximum=45&page=",
-            "number_of_offers": 1062
-        },
-        {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=optimisation&typesConvention=143684&typesConvention=143685&typesConvention=143686&ty=&salaireMinimum=20&salaireMaximum=45&page=",
-            "number_of_offers": 8368
         }
     ]
 }
