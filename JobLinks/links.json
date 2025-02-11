@@ -1,16 +1,16 @@
 {
     "links": [
         {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=matlab&typesConvention=143684&typesConvention=143685&typesConvention=143686&typesCon=&page=",
-            "number_of_offers": 172
+            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=python&lieux=572920&distance=15&typesConvention=143684&typesConvention=143685&typesConvention=143686&typesConvention=143687&niveauxExperience=101881&page=",
+            "number_of_offers": 23
         },
         {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=pyhton&typesConvention=143684&typesConvention=143685&typesConvention=143686&typesCon==&page=",
-            "number_of_offers": 7
+            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=matlab&lieux=572920&distance=15&typesConvention=143684&typesConvention=143685&typesConvention=143686&typesConvention=143687&niveauxExperience=101881&page=",
+            "number_of_offers": 2
         },
         {
-            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=computer%20vision&typesConvention=143684&typesConvention=143685&typesConvention=1436&page=",
-            "number_of_offers": 15
+            "url": "https://www.apec.fr/candidat/recherche-emploi.html/emploi?lieux=572920&lieux=711&lieux=720&salaireMinimum=20&salaireMaximum=200&fonctions=101831&niveauxExperience=101881&anciennetePublication=101852&typesConvention=143684&typesConvention=143685&typesConvention=143686&typesConvention=143687&typesConvention=143706&page=",
+            "number_of_offers": 3555
         }
     ]
 }

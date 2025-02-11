@@ -18,7 +18,7 @@ import os
 import json
 
 options = Options()
-options.add_argument('--headless')
+# options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
@@ -282,7 +282,7 @@ def get_job_links(url):
     try:
         # Open the job application link
         options2 = Options()
-        options2.add_argument('--headless')
+        # options2.add_argument('--headless')
         options2.add_argument('--no-sandbox')
         options2.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options2)
