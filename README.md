@@ -6,11 +6,10 @@ This Python project automates the process of extracting job application links an
 ## Project Structure
 - **`JobLinks/links.json`**: Input JSON file (that you should edit) containing job search links to process. 
 - **`JobLinks/Applications.csv`**: Output CSV file (that will be created) storing extracted application links.
-
-⚠️ **CAUTION:** Links in `links.json` should all finish with `&page=` (check the existing example in the `links.json` file)
-  - If the copied link doesn’t contain `&page=` at the end, append it.  
-  - If the copied link has `&page=2` or any other number, just remove the number.  
-
+> [!CAUTION]
+>  Links in `links.json` should all finish with `&page=` (check the existing example)
+>   - If the copied link doesn’t contain `&page=` at the end, append it.  
+>   - If the copied link has `&page=2` or any other number, just remove the number.  
 
 ## Prerequisites
 - Python 3.8+
